@@ -46,34 +46,34 @@ int main()
 {
     // Test Case 1
     std::cout << "Test Case 1:\n";
-    int n1 = 6;
-    std::vector<int> denominations1 = {1, 5, 10, 25, 50, 100};
-    int p1 = 76;
-    int q1 = 1000;
+    int n1 = 4;
+    std::vector<int> denominations1 = {5, 25, 10, 50};
+    int p1 = 325;
+    int q1 = 500;
     runTestCase(n1, denominations1, p1, q1);
 
     // Test Case 2
     std::cout << "Test Case 2:\n";
     int n2 = 4;
-    std::vector<int> denominations2 = {1, 3, 4, 5};
-    int p2 = 7;
-    int q2 = 12;
+    std::vector<int> denominations2 = {20, 25, 10, 5};
+    int p2 = 160;
+    int q2 = 200;
     runTestCase(n2, denominations2, p2, q2);
 
     // Test Case 3
     std::cout << "Test Case 3:\n";
-    int n3 = 5;
-    std::vector<int> denominations3 = {2, 5, 10, 20, 50};
-    int p3 = 45;
+    int n3 = 3;
+    std::vector<int> denominations3 = {1, 10, 7};
+    int p3 = 85;
     int q3 = 100;
     runTestCase(n3, denominations3, p3, q3);
 
     // Test Case 4
     std::cout << "Test Case 4:\n";
-    int n4 = 3;
-    std::vector<int> denominations4 = {1, 2, 5};
-    int p4 = 11;
-    int q4 = 20;
+    int n4 = 5;
+    std::vector<int> denominations4 = {100, 25, 10, 5, 1};
+    int p4 = 711;
+    int q4 = 1000;
     runTestCase(n4, denominations4, p4, q4);
 
     // Test Case 5
