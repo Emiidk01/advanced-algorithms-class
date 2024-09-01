@@ -8,22 +8,29 @@
 class Change
 {
 private:
+    // Vector que contiene las denominaciones de monedas disponibles
     std::vector<int> denominations;
     int numberOfCoins;
 
 public:
-    // Constructor
+    // Constructor de la clase Change
+    // num_denominations: número de tipos de monedas
+    // denoms: vector con las denominaciones de las monedas
     Change(int num_denominations, std::vector<int> denoms) : numberOfCoins(num_denominations), denominations(denoms)
     {
         std::sort(denominations.begin(), denominations.end(), std::greater<int>());
     }
 
-    // calculate the change
+    // Metodo para calcular el cambio
+    // prize: cantidad que se debe pagar
+    // bill: cantidad entregada por el cliente
+    // Devuelve un vector con la cantidad de monedas de cada denominacion utilizadas para el cambio
     std::vector<int> calculateChange(int prize, int bill)
     {
-        int change = bill - prize;
+        int change = bill - prize; // Calcula la cantidad de cambio
         std::vector<int> coinsUsed(numberOfCoins, 0);
 
+        // Recorre las denominaciones y calcula cuántas monedas se necesitan de cada una
         for (int i = 0; i < numberOfCoins; i++)
         {
             while (change >= denominations[i])
@@ -36,7 +43,8 @@ public:
         return coinsUsed;
     }
 
-    // print the result
+    // Metodo para imprimir el resultado
+    // coinsUsed: vector con la cantidad de monedas usadas de cada denominación
     void printChange(const std::vector<int> &coinsUsed)
     {
         for (int i = 0; i < numberOfCoins; i++)

@@ -3,7 +3,7 @@
 // Title: Implementation of the "Greedy Algorithms" programming technique
 
 // Created On: 28/08/2024
-// Updated On: 28/08/2024
+// Updated On: 01/09/2024
 
 // Authors:
 //     Angel Mauricio Ramirez Herrera - A01710158
@@ -11,11 +11,9 @@
 //     Emiliano Gomez Gonzalez - A01710711
 
 // Code Description:
-//
-//
-//
-//
-//
+// Este programa implementa una tecnica de algoritmos avaros para calcular el cambio de monedas
+// utilizando las denominaciones disponibles. Los diferentes casos de prueba muestran el calculo
+// del cambio para varias configuraciones de denominaciones y valores a pagar.
 
 // -----------------------------------------------------
 
@@ -36,6 +34,9 @@ están ordenados) que representan las diferentes denominations disponibles de la
 
 int main()
 {
+    // Seccion de pruebas
+    // Cada caso de prueba utiliza un conjunto diferente de denominaciones de monedas
+
     // Case 1: No denominations available
     std::vector<int> case1Denominations;
     Change change1(0, case1Denominations);
