@@ -1,17 +1,19 @@
 """
+Titulo: Implementing Hash String
 
-Title: Implementing Hash String
+Creado en: 28/09/2024
+Actualizado en: 28/09/2024
 
-Created On: 28/09/2024
-Updated On: 28/09/2024
-
-Authors:
+Autores:
 Angel Mauricio Ramirez Herrera - A01710158
 Cristian Chavez Guia - A0171680
 Emiliano Gomez Gonzalez - A01710711
 
 Code Description:
-
+Este programa recibe un archivo de texto y un valor entero n, donde n debe ser un multiplo de 4
+y estar en el rango de 16 a 64. El objetivo es crear una tabla con n columnas y llenar cada columna
+con los caracteres del archivo. Luego, se calcula un arreglo a que contiene el valor de cada columna
+ajustado por módulo 256 y, finalmente, se genera una cadena de salida en formato hexadecimal.
 """
 
 """
@@ -39,17 +41,16 @@ del archivo de texto (incluyendo saltos de líneas) en los renglones que sean ne
 """
 
 def procesar_archivo(nombre_archivo, n, caso_numero):
-    # Leer el archivo de entrada
     with open(nombre_archivo, 'r', encoding='utf-8') as archivo:
         contenido = archivo.read()
 
     print(f"\n{'='*10} Caso {caso_numero} (n = {n}) {'='*10}")
 
-    # Paso 1: Construcción de la tabla
-    filas = len(contenido) // n + (1 if len(contenido) % n != 0 else 0)  # Calcula cuántas filas serán necesarias
-    tabla = [[''] * n for _ in range(filas)]  # Tabla inicial vacía de tamaño filas x n
+    # construccion de la tabla
+    filas = len(contenido) // n + (1 if len(contenido) % n != 0 else 0)  # calcula cuantas filas serán necesarias
+    tabla = [[''] * n for _ in range(filas)]  # tabla inicial vacia de tamaño filas x n
 
-    # Rellenar la tabla con los caracteres del archivo
+    # rellenar la tabla con los caracteres del archivo
     indice = 0
     for i in range(filas):
         for j in range(n):
@@ -57,45 +58,44 @@ def procesar_archivo(nombre_archivo, n, caso_numero):
                 tabla[i][j] = contenido[indice]
                 indice += 1
             else:
-                tabla[i][j] = chr(n)  # Rellenar con el valor ASCII del número n si no hay más caracteres
+                tabla[i][j] = chr(n)  # rellena con el valor ASCII del numero n si no hay mas caracteres
 
-    # Mostrar la tabla generada
+    # mostrar la tabla generada
     print("\nTabla generada:")
     for fila in tabla:
         print("".join(fila))
 
-    # Paso 2: Calcular el arreglo a
+    # calcular el arreglo a
     a = [0] * n
     for j in range(n):
         suma_columna = 0
         for i in range(filas):
-            suma_columna += ord(tabla[i][j])  # Sumar los valores ASCII de cada columna
-        a[j] = suma_columna % 256  # Aplicar módulo 256
+            suma_columna += ord(tabla[i][j])  # suma los valores ASCII de cada columna
+        a[j] = suma_columna % 256
 
-    # Mostrar el arreglo 'a'
     print("\nArreglo 'a':", a)
 
-    # Paso 3: Generar la cadena hexadecimal en bloques de 4 columnas
+    # generar la cadena hexadecimal en bloques de 4 columnas
     salida_hex = []
     for i in range(0, n, 4):
-        # Concatenar los valores hexadecimales de 4 columnas en un solo bloque
+        # concatenar los valores hexadecimales de 4 columnas en un solo bloque
         bloque = ''.join(f"{a[i + j]:02X}" for j in range(4))
         salida_hex.append(bloque)
 
-    # Mostrar la cadena de salida en bloques separados
+    # mostrar la cadena de salida en bloques separados
     cadena_salida = " ".join(salida_hex)
     print("\nCadena de salida (en bloques de 4 columnas):", cadena_salida)
 
     return cadena_salida
 
 
-# Ejecutar los 4 casos de prueba con diferentes valores de n
+# casos de prueba con diferentes valores de n
 archivo1 = "caso1.txt"
 archivo2 = "quijote.txt"
 archivo3 = "littleprince.txt"
 archivo4 = "frankenstein.txt"
 
-print("\n\n--- Ejecución de Casos de Prueba ---")
+print("\n\n--- Ejecucion de Casos de Prueba ---")
 
 # Caso 1: n = 16
 procesar_archivo(archivo1, 16, caso_numero=1)
