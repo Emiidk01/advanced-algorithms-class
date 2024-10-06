@@ -10,9 +10,27 @@ Cristian Chavez Guia - A0171680
 Emiliano Gomez Gonzalez - A01710711
 
 Descripcion del codigo:
+Este archivo implementa un algoritmo que encuentra el substring común más largo entre dos cadenas. En el análisis de transmisiones, se utiliza para medir la similitud entre las transmisiones. Si hay un substring común largo entre ellas, puede ser un indicio de que las transmisiones están infectadas con un virus.
 """
 
 def longest_common_substring(s1, s2):
+    """
+    Encuentra el substring común más largo entre dos cadenas.
+
+    Usa programación dinámica para encontrar el substring común más largo (LCS) 
+    entre dos cadenas de manera eficiente. Si no existe un substring común, 
+    devuelve None para ambos índices.
+
+    Parámetros:
+    s1 (str): Primera cadena.
+    s2 (str): Segunda cadena.
+
+    Retorna:
+    tuple: Una tupla (start, end) que representa las posiciones de inicio y fin 
+    del substring más largo común en la primera cadena (s1). Los índices son 1-based.
+    Si no hay substring común, retorna (None, None).
+    """
+
     m = len(s1)
     n = len(s2)
     

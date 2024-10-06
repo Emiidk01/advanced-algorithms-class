@@ -10,9 +10,22 @@ Cristian Chavez Guia - A0171680
 Emiliano Gomez Gonzalez - A01710711
 
 Descripcion del codigo:
+Este archivo implementa el algoritmo de Manacher, que encuentra el palíndromo más largo dentro de una cadena de texto. Durante el análisis de transmisiones, este algoritmo se utiliza para detectar si los mcodes están contenidos dentro de palíndromos, lo que puede ser una señal de que hay un código malicioso presente.
 """
 
 def manacher(s):
+    """
+    Implementa el algoritmo de Manacher para encontrar el palíndromo más largo 
+    en una cadena dada. La función maneja palíndromos de longitud par e impar.
+
+    Parámetros:
+    s (str): La cadena en la que se desea encontrar el palíndromo más largo.
+
+    Retorna:
+    tuple: Una tupla (start, end) que representa los índices (1-based) en los 
+    que inicia y termina el palíndromo más largo encontrado en la cadena original.
+    """
+
     # Preprocesar la cadena para manejar palíndromos de longitud par
     T = '#'.join(f'^{s}$')  # Se agregan caracteres especiales al inicio y al final
     n = len(T)

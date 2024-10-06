@@ -10,6 +10,7 @@ Cristian Chavez Guia - A0171680
 Emiliano Gomez Gonzalez - A01710711
 
 Descripcion del codigo:
+Este archivo contiene el programa que coordina el análisis de las transmisiones y la detección de posibles códigos maliciosos. Usa varios algoritmos: el algoritmo Z para buscar patrones, Manacher para detectar palíndromos, y otro para encontrar el substring común más largo. El programa lee archivos de transmisión y de códigos maliciosos (mcodes), busca coincidencias y reporta si hay mcodes presentes. También detecta palíndromos y similitudes entre las transmisiones, lo que ayuda a identificar posibles virus.
 """
 
 import z_algorithm
@@ -18,6 +19,23 @@ import longest_substr
 import os
 
 def analizar_archivos(transmision1, transmision2, mcode1, mcode2, mcode3):
+    """
+    Analiza el contenido de dos transmisiones para detectar posibles virus.
+
+    Lee los archivos de las transmisiones y los patrones (mcodes), y aplica algoritmos de 
+    búsqueda para detectar coincidencias que puedan indicar la presencia de un virus.
+
+    Parámetros:
+    transmision1 (str): Nombre del archivo que contiene la primera transmisión.
+    transmision2 (str): Nombre del archivo que contiene la segunda transmisión.
+    mcode1 (str): Nombre del archivo que contiene el primer mcode.
+    mcode2 (str): Nombre del archivo que contiene el segundo mcode.
+    mcode3 (str): Nombre del archivo que contiene el tercer mcode.
+
+    Retorna:
+    None
+    """
+
     # lista con los nombres de los archivos
     nom_archivos = [transmision1, transmision2, mcode1, mcode2, mcode3]
     contenido_archivos = []
@@ -91,4 +109,5 @@ def analizar_archivos(transmision1, transmision2, mcode1, mcode2, mcode3):
     else:
         print("\nNo se ha detectado ningún virus en las transmisiones.")
 
+# Llamada a la función
 analizar_archivos('transmission01.txt', 'transmission12.txt', 'mcode01.txt', 'mcode02.txt', 'mcode03.txt')
