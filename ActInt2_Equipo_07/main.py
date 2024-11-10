@@ -1,6 +1,7 @@
 import sys
 import itertools
 import math
+import heapq
 
 # Matriz de distancias en kilómetros
 kms_matrix = [
@@ -10,30 +11,79 @@ kms_matrix = [
     [32, 21, 7, 0]
 ]
 
-def prim_mst(matrix):
-    num_nodes = len(matrix)
-    selected_nodes = [False] * num_nodes
-    selected_nodes[0] = True
-    mst_edges = []
-
-    for _ in range(num_nodes - 1):
-        min_edge = (None, None, sys.maxsize)  # (start, end, weight)
+def dijkstra_from_matrix(kms_matrix, start_node):
+    # Inicializamos el número de nodos
+    n = len(kms_matrix)
+    
+    # Inicializar distancias (todas a infinito, excepto la del nodo de inicio)
+    distances = [float('inf')] * n
+    distances[start_node] = 0
+    
+    # Cola de prioridad para procesar los nodos de acuerdo con la distancia más corta
+    priority_queue = [(0, start_node)]  # (distancia, nodo)
+    
+    while priority_queue:
+        current_distance, current_node = heapq.heappop(priority_queue)
         
-        for i in range(num_nodes):
-            if selected_nodes[i]:
-                for j in range(num_nodes):
-                    if not selected_nodes[j] and matrix[i][j] != 0 and matrix[i][j] < min_edge[2]:
-                        min_edge = (i, j, matrix[i][j])
+        # Si la distancia actual es mayor que la ya registrada, continuar al siguiente
+        if current_distance > distances[current_node]:
+            continue
+        
+        # Recorremos los nodos vecinos de la matriz de distancias
+        for neighbor in range(n):
+            if neighbor != current_node:  # Evitamos volver al nodo actual
+                distance = current_distance + kms_matrix[current_node][neighbor]
+                
+                # Si encontramos una ruta más corta a un nodo vecino, actualizamos la distancia
+                if distance < distances[neighbor]:
+                    distances[neighbor] = distance
+                    heapq.heappush(priority_queue, (distance, neighbor))
+    
+    return distances
 
-        mst_edges.append(min_edge)
-        selected_nodes[min_edge[1]] = True
+# Nodo de inicio (por ejemplo, el nodo 0, correspondiente a la primera fila/columna de la matriz)
+start_node = 0
 
-    return mst_edges
+# Llamamos a la función para calcular las distancias más cortas desde el nodo de inicio
+shortest_paths = dijkstra_from_matrix(kms_matrix, start_node)
 
-mst = prim_mst(kms_matrix)
-print("Árbol de Expansión Mínima (Cableado Óptimo):")
-for edge in mst:
-    print(f"Km de colonia {chr(65 + edge[0])} a colonia {chr(65 + edge[1])}: {edge[2]}")
+# Mostrar los resultados
+print(f"Las distancias más cortas desde el nodo {start_node} son:")
+for node, distance in enumerate(shortest_paths):
+    print(f"Nodo {node}: {distance} km")
+
+# Nodo de inicio (por ejemplo, el nodo 0, correspondiente a la primera fila/columna de la matriz)
+start_node = 1
+
+# Llamamos a la función para calcular las distancias más cortas desde el nodo de inicio
+shortest_paths = dijkstra_from_matrix(kms_matrix, start_node)
+
+# Mostrar los resultados
+print(f"Las distancias más cortas desde el nodo {start_node} son:")
+for node, distance in enumerate(shortest_paths):
+    print(f"Nodo {node}: {distance} km")
+
+# Nodo de inicio (por ejemplo, el nodo 0, correspondiente a la primera fila/columna de la matriz)
+start_node = 2
+
+# Llamamos a la función para calcular las distancias más cortas desde el nodo de inicio
+shortest_paths = dijkstra_from_matrix(kms_matrix, start_node)
+
+# Mostrar los resultados
+print(f"Las distancias más cortas desde el nodo {start_node} son:")
+for node, distance in enumerate(shortest_paths):
+    print(f"Nodo {node}: {distance} km")
+
+# Nodo de inicio (por ejemplo, el nodo 0, correspondiente a la primera fila/columna de la matriz)
+start_node = 3
+
+# Llamamos a la función para calcular las distancias más cortas desde el nodo de inicio
+shortest_paths = dijkstra_from_matrix(kms_matrix, start_node)
+
+# Mostrar los resultados
+print(f"Las distancias más cortas desde el nodo {start_node} son:")
+for node, distance in enumerate(shortest_paths):
+    print(f"Nodo {node}: {distance} km")
 
 # Generamos todas las permutaciones posibles de nodos (colonias) excluyendo el nodo inicial
 colonies = [0, 1, 2, 3]
