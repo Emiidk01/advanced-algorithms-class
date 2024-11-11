@@ -4,6 +4,18 @@ from heapq import heappop, heappush
 
 # Función para obtener el Árbol de Expansión Mínima (Kruskal)
 def kruskal_mst(adj_matrix):
+    """Encuentra el Árbol de Expansión Mínima (MST) usando el algoritmo de Kruskal.
+
+    Parámetros:
+        adj_matrix (lista de listas): Matriz de adyacencia que representa el grafo.
+
+    Devuelve:
+        tuple: Una lista de aristas en el MST (lista de tuplas) y el peso total del MST (int).
+
+    Complejidad:
+        O(E log E) - Ordenar las aristas toma O(E log E), y las operaciones de unión-búsqueda son casi constantes
+                     gracias a la compresión de caminos y unión por rango.
+    """
     n = len(adj_matrix)
     edges = []
     for i in range(n):
@@ -15,6 +27,7 @@ def kruskal_mst(adj_matrix):
     parent = list(range(n))
     
     def find(x):
+        """Función auxiliar para encontrar la raíz de un nodo con compresión de caminos."""
         if parent[x] == x:
             return x
         parent[x] = find(parent[x])
@@ -35,6 +48,17 @@ def kruskal_mst(adj_matrix):
 
 # Implementación de TSP usando Programación Dinámica y Bitmasking
 def tsp_dp(adj_matrix):
+    """Resuelve el Problema del Viajante (TSP) usando programación dinámica con bitmasking.
+
+    Parámetros:
+        adj_matrix (lista de listas): Matriz de adyacencia que representa el grafo.
+
+    Devuelve:
+        tuple: La ruta óptima (lista) y el costo mínimo de visitar todos los nodos y volver al origen (int).
+
+    Complejidad:
+        O(N^2 * 2^N) - Existen 2^N subconjuntos, y cada subconjunto puede tener hasta N posibles estados.
+    """
     N = len(adj_matrix)
     dp = [[float('inf')] * (1 << N) for _ in range(N)]
     dp[0][1] = 0  # Empezamos en el nodo 0 y marcamos solo el nodo 0 como visitado
@@ -78,6 +102,21 @@ def tsp_dp(adj_matrix):
 
 # Función de búsqueda para el algoritmo de Ford-Fulkerson
 def bfs(capacity, source, sink, parent):
+    """Realiza una búsqueda en anchura (BFS) para verificar si existe un camino desde el origen hasta el sumidero
+       con capacidad disponible.
+
+    Parámetros:
+        capacity (lista de listas): Matriz de capacidades del grafo.
+        source (int): El nodo de origen.
+        sink (int): El nodo de destino.
+        parent (lista): Lista para almacenar los nodos padres en el camino encontrado.
+
+    Devuelve:
+        bool: True si existe un camino desde el origen al sumidero con capacidad disponible, False de lo contrario.
+
+    Complejidad:
+        O(V + E) - Complejidad estándar de BFS, donde V es el número de vértices y E es el número de aristas.
+    """
     visited = [False] * len(capacity)
     queue = deque([source])
     visited[source] = True
@@ -95,6 +134,19 @@ def bfs(capacity, source, sink, parent):
 
 # Algoritmo de Ford-Fulkerson
 def ford_fulkerson(capacity, source, sink):
+    """Encuentra el flujo máximo desde el origen al sumidero usando el algoritmo de Ford-Fulkerson.
+
+    Parámetros:
+        capacity (lista de listas): Matriz de capacidades del grafo.
+        source (int): El nodo de origen.
+        sink (int): El nodo de destino.
+
+    Devuelve:
+        int: El flujo máximo desde el origen hasta el sumidero.
+
+    Complejidad:
+        O(E * max_flow) - La complejidad de Ford-Fulkerson depende del flujo máximo y del número de aristas.
+    """
     parent = [-1] * len(capacity)
     max_flow = 0
 
@@ -117,7 +169,20 @@ def ford_fulkerson(capacity, source, sink):
 
 # Función para encontrar la central más cercana
 def closest_central(new_point, centrals):
+    """Encuentra la central más cercana a un nuevo punto usando la distancia euclidiana.
+
+    Parámetros:
+        new_point (tupla): Coordenadas de la nueva central.
+        centrals (lista de tuplas): Coordenadas de las centrales existentes.
+
+    Devuelve:
+        tuple: Las coordenadas de la central más cercana y la distancia a ella.
+
+    Complejidad:
+        O(N) - Para N centrales, la función calcula la distancia euclidiana a cada central.
+    """
     def euclidean_distance(p1, p2):
+        """Calcula la distancia euclidiana entre dos puntos."""
         return math.sqrt((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)
     
     closest = None
