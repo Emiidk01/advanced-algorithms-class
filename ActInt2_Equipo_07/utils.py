@@ -33,46 +33,48 @@ def kruskal_mst(adj_matrix):
 
     return mst_edges, mst_weight
 
-
+# Implementación de TSP usando Programación Dinámica y Bitmasking
 def tsp_dp(adj_matrix):
-    n = len(adj_matrix)
-    dp = [[float('inf')] * (1 << n) for _ in range(n)]  # DP table
-    dp[0][1] = 0  # Start at city 0
+    N = len(adj_matrix)
+    dp = [[float('inf')] * (1 << N) for _ in range(N)]
+    dp[0][1] = 0  # Empezamos en el nodo 0 y marcamos solo el nodo 0 como visitado
 
-    # Llenar la tabla dp con costos mínimos para cada subconjunto de ciudades
-    for mask in range(1, 1 << n):
-        for u in range(n):
-            if (mask >> u) & 1:  # Si u está en el subconjunto representado por mask
-                for v in range(n):
-                    if (mask >> v) & 1 == 0:  # Si v no está en el subconjunto
-                        dp[v][mask | (1 << v)] = min(dp[v][mask | (1 << v)], dp[u][mask] + adj_matrix[u][v])
+    for mask in range(1, 1 << N):
+        for u in range(N):
+            if (mask >> u) & 1:  # Si el nodo u está en el subconjunto representado por mask
+                for v in range(N):
+                    if (mask >> v) & 1 == 0:  # Si el nodo v no está en el subconjunto
+                        dp[v][mask | (1 << v)] = min(
+                            dp[v][mask | (1 << v)],
+                            dp[u][mask] + adj_matrix[u][v]
+                        )
 
-    # Encontrar el último nodo de la ruta óptima y el costo mínimo
+    # Encontrar el costo mínimo regresando al punto inicial
     min_cost = float('inf')
     last_node = -1
-    for i in range(1, n):
-        if dp[i][(1 << n) - 1] + adj_matrix[i][0] < min_cost:
-            min_cost = dp[i][(1 << n) - 1] + adj_matrix[i][0]
+    for i in range(1, N):
+        if dp[i][(1 << N) - 1] + adj_matrix[i][0] < min_cost:
+            min_cost = dp[i][(1 << N) - 1] + adj_matrix[i][0]
             last_node = i
 
-    # Recuperar la ruta óptima sin repeticiones
-    tsp_route = []
-    mask = (1 << n) - 1
-    for _ in range(n - 1):  # Recorrer n-1 ciudades además del inicio
-        tsp_route.append(last_node)
+    # Reconstrucción de la ruta óptima
+    tsp_route = [0]
+    mask = (1 << N) - 1
+    current_node = last_node
+
+    while current_node != 0:
+        tsp_route.append(current_node)
         next_node = -1
-        for i in range(n):
-            if (mask >> i) & 1 and dp[last_node][mask] == dp[i][mask ^ (1 << last_node)] + adj_matrix[i][last_node]:
+        for i in range(N):
+            if (mask >> i) & 1 and dp[current_node][mask] == dp[i][mask ^ (1 << current_node)] + adj_matrix[i][current_node]:
                 next_node = i
                 break
-        mask ^= (1 << last_node)
-        last_node = next_node
+        mask ^= (1 << current_node)
+        current_node = next_node
 
-    tsp_route.append(0)  # Agregar el nodo de inicio
-    tsp_route.reverse()  # Invertir la ruta para que esté en el orden correcto
-
-    return tsp_route
-
+    tsp_route.append(0)  # Volver al nodo inicial
+    tsp_route.reverse()  # Invertir para obtener el orden correcto
+    return tsp_route, min_cost
 
 # Función de búsqueda para el algoritmo de Ford-Fulkerson
 def bfs(capacity, source, sink, parent):
@@ -117,7 +119,7 @@ def ford_fulkerson(capacity, source, sink):
 def closest_central(new_point, centrals):
     def euclidean_distance(p1, p2):
         return math.sqrt((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)
-
+    
     closest = None
     min_distance = float('inf')
     for central in centrals:
