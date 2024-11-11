@@ -15,7 +15,7 @@ import sys
 import itertools
 import math
 import heapq
-from ActInt2_Equipo_07.Equipo_07_main.utils import kruskal_mst, tsp_dp, ford_fulkerson, closest_central
+from utils import kruskal_mst, tsp_dp, ford_fulkerson, closest_central
 
 def load_input(file_path):
     """Carga los datos de entrada desde un archivo.
