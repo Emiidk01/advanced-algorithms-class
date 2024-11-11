@@ -1,0 +1,9 @@
+Angel Mauricio Ramirez Herrera - A01710158
+1. Implementacion de algoritmo de Kruskal
+2. Función para encontrar la central más cercana
+Cristian Chavez Guia - A0171680
+1. Implementación de TSP usando Programación Dinámica
+2. Algoritmo de Ford-Fulkerson
+Emiliano Gomez Gonzalez - A01710711
+1. Implementacion del algoritmo de Prim
+2. Función para encontrar la central más cercana (Pair Programming con Angel)

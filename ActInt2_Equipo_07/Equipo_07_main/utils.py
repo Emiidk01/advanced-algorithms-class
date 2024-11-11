@@ -46,9 +46,9 @@ def kruskal_mst(adj_matrix):
 
     return mst_edges, mst_weight
 
-# Implementación de TSP usando Programación Dinámica y Bitmasking
+# Implementación de TSP usando Programación Dinámica
 def tsp_dp(adj_matrix):
-    """Resuelve el Problema del Viajante (TSP) usando programación dinámica con bitmasking.
+    """Resuelve el Problema del Viajante (TSP) usando programación dinámica.
 
     Parámetros:
         adj_matrix (lista de listas): Matriz de adyacencia que representa el grafo.

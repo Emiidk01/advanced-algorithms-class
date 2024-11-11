@@ -1,6 +1,19 @@
 import sys
 
 def prim_mst(graph, n):
+    """
+    Encuentra el Arbol de Expansión Mínima (MST) usando el algoritmo de Prim.
+
+    Parametros:
+        graph (lista de listas): Matriz de adyacencia que representa el grafo.
+        n (int): Numero de nodos en el grafo.
+
+    Devuelve:
+        tuple: Una lista de aristas en el MST (lista de tuplas) y el costo total del MST (int).
+
+    Complejidad:
+        O(n^2) - Debido a la doble iteracion sobre los nodos y la busqueda de aristas de menor peso.
+    """
     selected_node = [False] * n
     selected_node[0] = True
     mst_edges = []
