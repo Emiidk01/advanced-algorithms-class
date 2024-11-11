@@ -1,3 +1,16 @@
+"""
+Titulo: Actividad Integradora 2
+
+Creado en: 9/11/2024
+Actualizado en: 10/11/2024
+
+Autores:
+Angel Mauricio Ramirez Herrera - A01710158
+Cristian Chavez Guia - A0171680
+Emiliano Gomez Gonzalez - A01710711
+"""
+
+# Imports necesarios
 import sys
 import itertools
 import math
@@ -5,6 +18,19 @@ import heapq
 from utils import kruskal_mst, tsp_dp, ford_fulkerson, closest_central
 
 def load_input(file_path):
+    """Carga los datos de entrada desde un archivo.
+
+    Parámetros:
+        file_path (str): La ruta al archivo de entrada.
+
+    Devuelve:
+        tuple: Una tupla que contiene el número de colonias (int), la matriz de adyacencia con distancias (lista de listas),
+               la matriz de capacidades máximas de flujo (lista de listas), una lista de tuplas con las coordenadas de cada
+               central (lista de tuplas), y las coordenadas de la nueva central (tupla).
+
+    Complejidad:
+        O(N^2) - Debido a la lectura de dos matrices de tamaño N x N desde el archivo.
+    """
     with open(file_path, 'r') as file:
         N = int(file.readline().strip())
         
@@ -32,6 +58,12 @@ def load_input(file_path):
     return N, kms_matrix, capacities, central_coords, new_contract_coord
 
 def main(file_path):
+    """Función principal para ejecutar las tareas especificadas en el enunciado del problema.
+
+    Parámetros:
+        file_path (str): La ruta al archivo de entrada.
+    """
+
     N, kms_matrix, capacities, central_coords, new_contract_coord = load_input(file_path)
 
     # 1. Calcular el árbol de expansión mínima para el cableado de fibra óptica
